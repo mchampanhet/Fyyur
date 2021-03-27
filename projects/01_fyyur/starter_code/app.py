@@ -394,9 +394,7 @@ def create_artist_submission():
 @app.route('/shows')
 def shows():
   # displays list of shows at /shows
-  data = Show.query.all()
-  for datum in data:
-    datum.start_time = format_datetime(datum.start_time.strftime('%m/%d/%Y, %H:%M'), 'full')
+  data = Show.query.order_by(Show.start_time.desc()).all()
   return render_template('pages/shows.html', shows=data)
 
 @app.route('/shows/create')
