@@ -73,6 +73,7 @@ class Show(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   venue_id = db.Column(db.Integer, db.ForeignKey('Venue.id'), nullable=False)
   venue_name = db.Column(db.String(120), nullable=False)
+  venue_image_link = db.Column(db.String(500))
   artist_id = db.Column(db.Integer, db.ForeignKey('Artist.id'), nullable=False)
   artist_name = db.Column(db.String(120), nullable=False)
   artist_image_link = db.Column(db.String(500))
@@ -151,6 +152,7 @@ artist3 = Artist(
 show1 = Show(
   venue_id=1,
   venue_name='The Musical Hop',
+  venue_image_link='https://images.unsplash.com/photo-1543900694-133f37abaaa5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60',
   artist_id=1,
   artist_name='Guns N Petals',
   artist_image_link='https://images.unsplash.com/photo-1549213783-8284d0336c4f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
@@ -159,6 +161,7 @@ show1 = Show(
 show2 = Show(
   venue_id=3,
   venue_name='Park Square Live Music & Coffee',
+  venue_image_link='https://images.unsplash.com/photo-1485686531765-ba63b07845a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=747&q=80',
   artist_id=2,
   artist_name='Matt Quevedo',
   artist_image_link='https://images.unsplash.com/photo-1495223153807-b916f75de8c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80',
@@ -167,6 +170,7 @@ show2 = Show(
 show3 = Show(
   venue_id=3,
   venue_name='Park Square Live Music & Coffee',
+  venue_image_link='https://images.unsplash.com/photo-1485686531765-ba63b07845a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=747&q=80',
   artist_id=3,
   artist_name='The Wild Sax Band',
   artist_image_link='https://images.unsplash.com/photo-1558369981-f9ca78462e61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=794&q=80',
@@ -175,6 +179,7 @@ show3 = Show(
 show4 = Show(
   venue_id=3,
   venue_name='Park Square Live Music & Coffee',
+  venue_image_link='https://images.unsplash.com/photo-1485686531765-ba63b07845a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=747&q=80',
   artist_id=3,
   artist_name='The Wild Sax Band',
   artist_image_link='https://images.unsplash.com/photo-1558369981-f9ca78462e61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=794&q=80',
@@ -183,6 +188,7 @@ show4 = Show(
 show5 = Show(
   venue_id=3,
   venue_name='Park Square Live Music & Coffee',
+  venue_image_link='https://images.unsplash.com/photo-1485686531765-ba63b07845a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=747&q=80',
   artist_id=3,
   artist_name='The Wild Sax Band',
   artist_image_link='https://images.unsplash.com/photo-1558369981-f9ca78462e61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=794&q=80',
