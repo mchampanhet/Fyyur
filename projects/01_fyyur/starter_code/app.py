@@ -273,7 +273,10 @@ def search_venues():
 def show_venue(venue_id):
   # shows the venue page with the given venue_id
   data = Venue.query.get(venue_id)
-  # data = list(filter(lambda d: d['id'] == venue_id, [data1, data2, data3]))[0]
+  data.upcoming_shows = db.session.query(Show).filter(Show.venue_id == venue_id, Show.start_time > datetime.now())
+  data.upcoming_shows_count = data.upcoming_shows.count()
+  data.past_shows = db.session.query(Show).filter(Show.venue_id == venue_id, Show.start_time < datetime.now())
+  data.past_shows_count = data.past_shows.count()
   return render_template('pages/show_venue.html', venue=data)
 
 #  Create Venue
@@ -331,7 +334,10 @@ def search_artists():
 def show_artist(artist_id):
   # shows the artist page with the given artist_id
   data = Artist.query.get(artist_id)
-  # data = list(filter(lambda d: d['id'] == artist_id, [data1, data2, data3]))[0]
+  data.upcoming_shows = db.session.query(Show).filter(Show.artist_id == artist_id, Show.start_time > datetime.now())
+  data.upcoming_shows_count = data.upcoming_shows.count()
+  data.past_shows = db.session.query(Show).filter(Show.artist_id == artist_id, Show.start_time < datetime.now())
+  data.past_shows_count = data.past_shows.count()
   return render_template('pages/show_artist.html', artist=data)
 
 #  Update
