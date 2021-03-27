@@ -249,7 +249,7 @@ def index():
 
 @app.route('/venues')
 def venues():
-  venues_data = Venue.query.all()
+  venues_data = Venue.query.order_by(Venue.city).all()
   data = {}
   for venue in venues_data:
     if venue.city + venue.state not in data:
@@ -321,7 +321,7 @@ def delete_venue(venue_id):
 #  ----------------------------------------------------------------
 @app.route('/artists')
 def artists():
-  data = Artist.query.all()
+  data = Artist.query.order_by(Artist.name).all()
   return render_template('pages/artists.html', artists=data)
 
 @app.route('/artists/search', methods=['POST'])
