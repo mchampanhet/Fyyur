@@ -80,11 +80,11 @@ class Show(db.Model):
   artist_image_link = db.Column(db.String(500))
   start_time = db.Column(db.DateTime, nullable=False)
 
+# if the tables exist but are empty, seed them
 conn = psycopg2.connect(app.config['SQLALCHEMY_DATABASE_URI'])
 cursor = conn.cursor()
 cursor.execute('select count(*) as count from pg_tables where tablename in (\'Venue\', \'Show\', \'Artist\')')
 row = cursor.fetchone()
-print(row[0])
 if row[0] == 3:
   cursor.execute('select count(a.id) as count from (select id from "Artist" b union select id from "Show" c union select id from "Venue" d) a')
   row = cursor.fetchone()
@@ -295,7 +295,7 @@ def create_venue_form():
 
 @app.route('/venues/create', methods=['POST'])
 def create_venue_submission():
-  # TODO: modify data to be the data object returned from db insertion
+  # modify data to be the data object returned from db insertion
   is_error = False
   try:
     requestGenres = request.form['genres']
@@ -310,7 +310,7 @@ def create_venue_submission():
       website = request.form['website_link'],
       image_link = request.form['image_link'],
       facebook_link = request.form['facebook_link'],
-      seeking_talent = request.form['seeking_talent'] == 'y',
+      seeking_talent = request.form['seeking_talent'] == 'y' if 'seeking_talent' in request.form else False,
       seeking_description = request.form['seeking_description']
     )
     db.session.add(venue)
@@ -326,7 +326,7 @@ def create_venue_submission():
   if not is_error:
     flash('Venue ' + request.form['name'] + ' was successfully listed!')
   else:
-    # TODO: on unsuccessful db insert, flash an error instead.
+    # on unsuccessful db insert, flash an error instead.
     flash('An error occurred. Venue ' + request.form['name'] + ' could not be listed.', 'error')
   # see: http://flask.pocoo.org/docs/1.0/patterns/flashing/
   return render_template('pages/home.html')
@@ -477,14 +477,13 @@ def create_artist_submission():
       website = request.form['website_link'],
       image_link = request.form['image_link'],
       facebook_link = request.form['facebook_link'],
-      seeking_venue = request.form['seeking_venue'] == 'y',
+      seeking_venue = request.form['seeking_venue'] == 'y' if 'seeking_venue' in request.form else False,
       seeking_description = request.form['seeking_description']
     )
     db.session.add(artist)
     db.session.commit()
   except:
     is_error = True
-    print(sys.exc_info()[0])
     db.session.rollback()
   finally:
     db.session.close()
@@ -517,7 +516,7 @@ def create_shows():
 
 @app.route('/shows/create', methods=['POST'])
 def create_show_submission():
-  # TODO: modify data to be the data object returned from db insertion
+  # modify data to be the data object returned from db insertion
   is_error = False
   try:
     artist = Artist.query.get(request.form['artist_id'])
