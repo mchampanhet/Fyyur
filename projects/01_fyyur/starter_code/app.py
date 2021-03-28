@@ -298,9 +298,11 @@ def create_venue_submission():
   # TODO: modify data to be the data object returned from db insertion
   is_error = False
   try:
+    requestGenres = request.form['genres']
+    genres = [requestGenres] if type(requestGenres) == str else request.form.getlist('genres')
     venue = Venue(
       name = request.form['name'],
-      genres = request.form['genres'],
+      genres = genres,
       city = request.form['city'],
       state = request.form['state'],
       address = request.form['address'],
@@ -414,9 +416,11 @@ def create_artist_submission():
   # TODO: modify data to be the data object returned from db insertion
   is_error = False
   try:
+    requestGenres = request.form['genres']
+    genres = [requestGenres] if type(requestGenres) == str else request.form.getlist('genres')
     artist = Artist(
       name = request.form['name'],
-      genres = request.form['genres'],
+      genres = genres,
       city = request.form['city'],
       state = request.form['state'],
       phone = request.form['phone'],
